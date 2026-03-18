@@ -2,17 +2,28 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import Header from './Components/Header/Header.jsx'
-import Banner from './Components/Banner/Banner.jsx'
-import Footer from './Components/Footer/Footer.jsx'
+import MemberCard from './Components/MemberCard/MemberCard'
 
 
 function App() {
+
+  const members = [
+    {name: 'Nguyen Le Hoai Nam', id: '01', role: 'Chu nhiem'},
+    {name: 'Pham Minh Khuong', id: '02', role: 'PCN hoc tap'},
+    {name: 'Nguyen Quang Minh', id: '03', role: 'PCN hoc tap'}
+  ];
+  
   return (
     <>
-    <Header />
-    <Banner />
-    <Footer />
+        <ul>
+          {members.map((member) => (
+            <MemberCard
+              key={member.id}
+              name={member.name}
+              role={member.role}
+            />
+          ))}
+        </ul>
     </>
   )
 }
