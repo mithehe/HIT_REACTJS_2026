@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "name": "Domenic",
+        "points": 88110,
+        "team": "dcode"
+    },
+
+    {
+        "id": 2,
+        "name": "Sally",
+        "points": 72400,
+        "team": "Students"
+    },
+
+    {
+        "id": 3,
+        "name": "Nick",
+        "points": 52300,
+        "team": "dcode"
+    }
+]

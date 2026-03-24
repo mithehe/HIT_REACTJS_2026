@@ -1,31 +1,45 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import MemberCard from './Components/MemberCard/MemberCard'
+import Post from './Components/Post/Post'
+import posts from './data/posts.json'
+import Status from './Components/Status/Status'
 
 
 function App() {
 
-  const members = [
-    {name: 'Nguyen Le Hoai Nam', id: '01', role: 'Chu nhiem'},
-    {name: 'Pham Minh Khuong', id: '02', role: 'PCN hoc tap'},
-    {name: 'Nguyen Quang Minh', id: '03', role: 'PCN hoc tap'}
-  ];
-  
   return (
     <>
-        <ul>
-          {members.map((member) => (
-            <MemberCard
-              key={member.id}
-              name={member.name}
-              role={member.role}
-            />
-          ))}
-        </ul>
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Points</th>
+              <th>Team</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {posts.map((post => (
+              <Post
+                key={post.id}
+                id={post.id}
+                name={post.name}
+                points={post.points}
+                team={post.team}
+              />
+            )))}
+          </tbody>
+        </table>
+        <hr />
+
+        <div className='status'>
+          <Status></Status>
+        </div>
+
+      </div>
     </>
   )
 }
 
-export default App
+export default App;
