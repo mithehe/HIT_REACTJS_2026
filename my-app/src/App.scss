@@ -1,0 +1,32 @@
+.card {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+
+  &:hover {
+    transform: translateY(10px);
+  }
+}
+
+.userCard {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(209, 11, 11, 0.1);
+  transition: 0.3s;
+
+  img {
+    border-radius: 50%;
+  }
+
+  h3 {
+    margin: 10px 0 5px;
+    font-size: 1.2em;
+    color: #333;
+  }
+
+  &:hover {
+    transform: translateY(10px);
+  }
+}

@@ -1,44 +1,35 @@
+import { useEffect, useState } from 'react';
 import './App.css'
-import Post from './Components/Post/Post'
-import posts from './data/posts.json'
-import Status from './Components/Status/Status'
-
+import './App.scss'
 
 function App() {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  return (
-    <>
-      <div>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Points</th>
-              <th>Team</th>
-            </tr>
-          </thead>
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(res => res.json())
+      .then(users => {setUsers(users); setLoading(false)});
+  }, [])
 
-          <tbody>
-            {posts.map((post => (
-              <Post
-                key={post.id}
-                id={post.id}
-                name={post.name}
-                points={post.points}
-                team={post.team}
-              />
-            )))}
-          </tbody>
-        </table>
-        <hr />
+  if(loading){
+    return <p>Đang tải dữ liệu, vui lòng chờ...</p>
+  }
 
-        <div className='status'>
-          <Status></Status>
+  return(
+    <div className='card'>
+      {users.map(user =>
+        <div className='userCard'key = {user.id}>
+          <img
+            src={`https://ui-avatars.com/api/?name=${user.name}&background=random`}
+            alt={user.name}
+          />
+          <h3>{user.name}</h3>
+          <p>{user.email}</p>
         </div>
-
-      </div>
-    </>
+      )}
+    </div>
+  
   )
 }
 
