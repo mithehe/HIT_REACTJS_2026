@@ -1,35 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react';
 import './App.css'
+import './App.scss'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(res => res.json())
+      .then(users => {setUsers(users); setLoading(false)});
+  }, [])
+
+  if(loading){
+    return <p>Đang tải dữ liệu, vui lòng chờ...</p>
+  }
+
+  return(
+    <div className='card'>
+      {users.map(user =>
+        <div className='userCard'key = {user.id}>
+          <img
+            src={`https://ui-avatars.com/api/?name=${user.name}&background=random`}
+            alt={user.name}
+          />
+          <h3>{user.name}</h3>
+          <p>{user.email}</p>
+        </div>
+      )}
+    </div>
+  
   )
 }
 
-export default App
+export default App;
